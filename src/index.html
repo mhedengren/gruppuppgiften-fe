@@ -1,7 +1,20 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head><title>Little cat fanpage</title></head>
 <body>
-<div id="animal-listing">test</div>
+
+<div id="animal-listing">
+    <label for="animal-select">Select a cat</label>
+    <select id="animal-select">
+        <option value="0">0</option>
+        <option value="1">1</option>
+    </select>
+    <div id="animal-description">x</div>
+</div>
+<div id="animal-addition">
+    <label for="animal-to-add">Enter animal data to add (JSON format)</label>
+    <textarea id="animal-to-add"></textarea>
+    <button id="animal-add">Add animal</button>
+</div>
 </body>
 </html>
