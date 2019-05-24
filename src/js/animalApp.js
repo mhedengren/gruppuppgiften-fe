@@ -22,18 +22,21 @@
     $option.appendChild($optionText);
     return $option;
   }
+
   function populateSelect(type) {
+    clearElement($animalSelect);
+    $animalSelect.setAttribute('data-loaded', 'false');
     fetch(`http://${remoteUrl}/${type}s`)
       .then((response) => response.json())
       .then((data) => {
         const animals = data.data;
-        clearElement($animalSelect);
         const $defaultOption = createOption(null, `Select ${animalType}`);
         $animalSelect.appendChild($defaultOption);
         animals.forEach((animal) => {
           const $option = createOption(animal.id, animal.name);
           $animalSelect.appendChild($option);
         });
+        $animalSelect.setAttribute('data-loaded', 'true');
       });
   }
 
@@ -62,6 +65,7 @@
 
   function listenToAdd() {
     $animalAdd.addEventListener('click', () => {
+      $animalAdd.setAttribute('data-loaded', 'false');
       const dataText = $animalToAdd.value;
       const dataObject = JSON.parse(dataText);
       clearElement($animalToAdd);
@@ -72,7 +76,10 @@
         },
         body: JSON.stringify(dataObject),
       })
-        .then(() => populateSelect(animalType));
+        .then(() => {
+          $animalAdd.setAttribute('data-loaded', 'true');
+          populateSelect(animalType);
+        });
     })
   }
 

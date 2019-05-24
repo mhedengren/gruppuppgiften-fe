@@ -47,8 +47,7 @@ describe('html tests', () => {
   });
 
   test('populate select', (done) => {
-    driver.sleep(timeout / 2)
-      .then(() => driver.wait(until.elementLocated(By.id('animal-select')), timeout))
+    driver.wait(until.elementLocated(By.id('animal-select')), timeout)
       .then((select) => {
         driver.wait(until.elementIsVisible(select));
         select.click();
@@ -76,9 +75,13 @@ describe('html tests', () => {
         textarea.sendKeys('{"name":"test"}');
       })
       .then(() => driver.wait(until.elementLocated(By.id('animal-add')), timeout))
-      .then((button) => button.click())
-      .then(() => driver.sleep(timeout / 2))
+      .then((button) => {
+        button.click();
+        return button;
+      })
+      .then(waitUntilLoaded)
       .then(() => driver.wait(until.elementLocated(By.id('animal-select')), timeout))
+      .then(waitUntilLoaded)
       .then((select) => select.findElements(By.tagName('option')))
       .then((options) => options.pop())
       .then((lastOption) => lastOption.getAttribute('text'))
