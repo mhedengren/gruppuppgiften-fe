@@ -9,37 +9,46 @@
   const $animalToAdd = document.getElementById('animal-to-add');
   const $animalAdd = document.getElementById('animal-add');
 
+  function clearElement(element) {
+    while(element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  }
+
+  function createOption(value, text) {
+    const $option = document.createElement('option');
+    $option.setAttribute('value', value);
+    const $optionText = document.createTextNode(text);
+    $option.appendChild($optionText);
+    return $option;
+  }
   function populateSelect(type) {
     fetch(`http://${remoteUrl}/${type}s`)
       .then((response) => response.json())
       .then((data) => {
         const animals = data.data;
-        while ($animalSelect.firstChild) {
-          $animalSelect.removeChild($animalSelect.firstChild);
-        }
+        clearElement($animalSelect);
+        const $defaultOption = createOption(null, `Select ${animalType}`);
+        $animalSelect.appendChild($defaultOption);
         animals.forEach((animal) => {
-          const $option = document.createElement('option');
-          $option.setAttribute('value', animal.id);
-          $option.setAttribute('data-name', animal.name);
-          const $optionText = document.createTextNode(animal.name);
-          $option.appendChild($optionText);
+          const $option = createOption(animal.id, animal.name);
           $animalSelect.appendChild($option);
         });
       });
   }
 
   function getByTypeAndId(type, id) {
+    $animalDescription.setAttribute('data-loaded', 'false');
+    clearElement($animalDescription);
+
     fetch(`http://${remoteUrl}/${type}/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        while($animalDescription.firstChild) {
-          $animalDescription.removeChild($animalDescription.firstChild);
-        }
-        const $pre = document.createElement('pre');
+        //const $pre = document.createElement('pre');
         const text = JSON.stringify(data.data, null, '\t');
-        const $preText = document.createTextNode(text);
-        $pre.appendChild($preText);
-        $animalDescription.appendChild($pre);
+        const $text = document.createTextNode(text);
+        //$pre.appendChild($preText);
+        $animalDescription.appendChild($text);
         $animalDescription.setAttribute('data-loaded', 'true');
       });
   }
@@ -55,9 +64,7 @@
     $animalAdd.addEventListener('click', () => {
       const dataText = $animalToAdd.value;
       const dataObject = JSON.parse(dataText);
-      while($animalToAdd.firstChild) {
-        $animalToAdd.removeChild($animalToAdd.firstChild);
-      }
+      clearElement($animalToAdd);
       fetch(`http://${remoteUrl}/${animalType}`, {
         method: 'POST',
         headers: {

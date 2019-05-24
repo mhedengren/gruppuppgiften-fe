@@ -10,6 +10,16 @@ const PORT = 8081;
 const baseUrl = `localhost:${PORT}/`;
 const timeout = 1000;
 
+const waitUntilLoaded = (element) => {
+  return driver.wait(element.getAttribute('data-loaded'))
+    .then((loaded) => {
+      if (loaded === 'true') {
+        return element;
+      }
+      return false;
+    });
+};
+
 describe('html tests', () => {
   beforeAll((done) => {
     const server = express();
@@ -39,20 +49,21 @@ describe('html tests', () => {
   test('populate select', (done) => {
     driver.sleep(timeout / 2)
       .then(() => driver.wait(until.elementLocated(By.id('animal-select')), timeout))
-      .then((select) => driver.wait(until.elementIsVisible(select)))
       .then((select) => {
+        driver.wait(until.elementIsVisible(select));
         select.click();
         return select;
       })
       .then((select) => select.findElements(By.tagName('option')))
-      .then((options) => options[0])
-      .then((option) => option.click()) // This click apparently does not trigger!
-      .then(() => driver.sleep(timeout / 2))
+      .then((options) => {
+        driver.wait(until.elementIsVisible(options[1]));
+        options[1].click();
+      })
       .then(() => driver.wait(until.elementLocated(By.id('animal-description')), timeout))
-      .then((description) => driver.wait(until.elementIsVisible(description), timeout))
-      .then((description) => description.getAttribute('id'))
-      .then((dataLoaded) => {
-        expect(dataLoaded).toBe('true');
+      .then(waitUntilLoaded)
+      .then((description) => description.getText())
+      .then((text) => {
+        expect(text.length).toBeGreaterThan(0);
         done();
       });
   });
@@ -70,9 +81,9 @@ describe('html tests', () => {
       .then(() => driver.wait(until.elementLocated(By.id('animal-select')), timeout))
       .then((select) => select.findElements(By.tagName('option')))
       .then((options) => options.pop())
-      .then((lastOption) => lastOption.getAttribute('data-name'))
-      .then((dataName) => {
-        expect(dataName).toBe('test');
+      .then((lastOption) => lastOption.getAttribute('text'))
+      .then((text) => {
+        expect(text).toBe('test');
         done();
       });
   });
