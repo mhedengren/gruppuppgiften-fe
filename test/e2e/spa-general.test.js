@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import chromedriver from 'chromedriver';
 import { Builder, until, By } from 'selenium-webdriver';
+import server from '../../app';
 
 let listeningServer;
 let driver;
@@ -22,8 +23,6 @@ const waitUntilLoaded = (element) => {
 
 describe('html tests', () => {
   beforeAll((done) => {
-    const server = express();
-    server.use('/', express.static(path.join(__dirname, '../../src/')));
     listeningServer = server.listen(PORT);
 
     driver = new Builder().forBrowser('chrome').build();
