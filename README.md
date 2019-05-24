@@ -22,3 +22,61 @@ Arbeta inte med visuella aspekter (t ex css) i den här iterationen!
  däremot inte lägga till tester för all befintlig funktionalitet).
 * Skriv tester för REST-api:t i backend (se grenen "filips-take" i
  ursprungs-repot för gruppuppgiften).
+
+
+## Gruppindelning
+### Grupp 1  
+Använd Grupp 2 som backend
+https://github.com/TomSygiel/gruppuppgiften
+Tomasz Szczygiel - samordnare   
+Linda Storgård  
+Eunju Huss X  
+Melker Hedengren X  
+
+### Grupp 2  
+Använd Grupp 3 som backend
+https://github.com/JuliaLahdo/gruppuppgiften
+Rebecca Kling  
+Ronja Hallberg Myhr  
+Felicia Wallin X  
+Julia Lahdo X - samordnare  
+
+### Grupp 3  
+Använd Grupp 4 som backend
+https://github.com/MorganJalil/gruppuppgiften
+Morgan Jalil - samordnare  
+Fanny Schriwer  
+Jakob Edéus X  
+Kevin Jonsson X  
+
+### Grupp 4  
+Använd Grupp 5 som backend
+https://github.com/alkanngo/gruppuppgiften
+Aladdin Kanngo - samordnare  
+Sherie Klappenbach  
+Cristina Barbagallo  
+Ida Bennetsen X  
+
+### Grupp 5  
+Använd Grupp 6 som backend
+https://github.com/erik-malsater/gruppuppgiften
+Lukas Lennstring  
+Erik Målsäter - samordnare  
+Fredrik Skogberg  
+Ulrica Bonnertstig X  
+
+### Grupp 6  
+Använd Grupp 7 som backend
+https://github.com/OliviaHansson/gruppuppgiften
+Johanna Sjölin - samordnare  
+Olivia Hansson Lindblom  
+Wiktorija Valsö  
+Parmis Kamali X  
+
+### Grupp 7  
+Använd Grupp 1 som backend
+https://github.com/KaoriYoshimura/gruppuppgiften
+Ahnna Östling  
+Kaori Yoshimura - samordnare  
+Michael Persson X  
+Thérèse Scott Rossi X
