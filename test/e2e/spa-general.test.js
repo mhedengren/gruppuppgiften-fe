@@ -8,7 +8,7 @@ let driver;
 
 const PORT = 8081;
 const baseUrl = `localhost:${PORT}/`;
-const timeout = 500;
+const timeout = 1000;
 
 describe('html tests', () => {
   beforeAll((done) => {
@@ -37,7 +37,8 @@ describe('html tests', () => {
   });
 
   test('populate select', (done) => {
-    driver.wait(until.elementLocated(By.id('animal-select')), timeout)
+    driver.sleep(timeout / 2)
+      .then(() => driver.wait(until.elementLocated(By.id('animal-select')), timeout))
       .then((select) => driver.wait(until.elementIsVisible(select)))
       .then((select) => {
         select.click();
@@ -45,10 +46,11 @@ describe('html tests', () => {
       })
       .then((select) => select.findElements(By.tagName('option')))
       .then((options) => options[0])
-      .then((option) => option.click())
+      .then((option) => option.click()) // This click apparently does not trigger!
+      .then(() => driver.sleep(timeout / 2))
       .then(() => driver.wait(until.elementLocated(By.id('animal-description')), timeout))
       .then((description) => driver.wait(until.elementIsVisible(description), timeout))
-      .then((description) => description.getAttribute('data-loaded'))
+      .then((description) => description.getAttribute('id'))
       .then((dataLoaded) => {
         expect(dataLoaded).toBe('true');
         done();
@@ -64,6 +66,7 @@ describe('html tests', () => {
       })
       .then(() => driver.wait(until.elementLocated(By.id('animal-add')), timeout))
       .then((button) => button.click())
+      .then(() => driver.sleep(timeout / 2))
       .then(() => driver.wait(until.elementLocated(By.id('animal-select')), timeout))
       .then((select) => select.findElements(By.tagName('option')))
       .then((options) => options.pop())
