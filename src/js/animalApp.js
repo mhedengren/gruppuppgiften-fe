@@ -95,8 +95,18 @@
     })
   }
 
-  populateSelect(animalType);
-  listenToSelect();
-  listenToAdd();
-  listenToRadio();
+  function pageLoaded() {
+    populateSelect(animalType);
+    listenToSelect();
+    listenToRadio();
+    listenToAdd();
+  }
+
+  window.pageLoaded = pageLoaded;
+
+  module.exports = {
+    clearElement
+  };
+
+
 })();
