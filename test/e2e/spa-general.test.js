@@ -84,7 +84,8 @@ describe('html tests', () => {
       .then(() => driver.wait(until.elementLocated(By.id('animal-select')), timeout))
       .then(waitUntilLoaded)
       // Get the animal description text and validate it
-      .then((description) => description.getText())
+      .then((select) => select.findElements(By.tagName('option')))
+      .then((options) => options[0].getText())
       .then((text) => {
         expect(text).toBe('Select dog');
         done();
