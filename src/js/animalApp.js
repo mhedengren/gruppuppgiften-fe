@@ -68,7 +68,8 @@
     for (let i = 0; i < $animalTypeSelect.length; i++) {
       const element = $animalTypeSelect[i];
       element.addEventListener('click', (e) => {
-        alert(e.target.value); 
+        alert(e.target.value);
+        
       });
     }
   }
