@@ -4,6 +4,7 @@
 (function IIFE(){
   const remoteUrl = 'localhost:3000';
   let animalType = 'cat';
+  const $animalTypeSelect = document.querySelectorAll('input[type=radio]');
   const $animalSelect = document.getElementById('animal-select');
   const $animalDescription = document.getElementById('animal-description');
   const $animalToAdd = document.getElementById('animal-to-add');
@@ -63,6 +64,15 @@
     });
   }
 
+  function listenToRadio() {
+    for (let i = 0; i < $animalTypeSelect.length; i++) {
+      const element = $animalTypeSelect[i];
+      element.addEventListener('click', (e) => {
+        alert(e.target.value); 
+      });
+    }
+  }
+
   function listenToAdd() {
     $animalAdd.addEventListener('click', () => {
       $animalAdd.setAttribute('data-loaded', 'false');
@@ -86,4 +96,5 @@
   populateSelect(animalType);
   listenToSelect();
   listenToAdd();
+  listenToRadio();
 })();
