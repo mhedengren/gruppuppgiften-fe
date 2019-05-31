@@ -34,6 +34,19 @@ describe('html tests', () => {
       .then(done);
   });
 
+  describe('animal type', function() {
+    describe('#listenToRadio()', function() {
+  //it is used write test spec
+  it('should select correct animal type', function(done) {
+        var animalType = new User('Luna');
+        user.save(function(err) {
+          if (err) done(err);
+          else done();
+        });
+      });
+    });
+  });
+
   test('smoke test', (done) => {
     // Find an element that is available in the static html of the page
     driver.wait(until.elementLocated(By.id('animal-listing')), timeout)
@@ -68,25 +81,6 @@ describe('html tests', () => {
       .then((description) => description.getText())
       .then((text) => {
         expect(text.length).toBeGreaterThan(0);
-        done();
-      });
-  });
-  test('select radio button', (done) => {
-    // First find the radio-button and select it
-    driver.wait(until.elementLocated(By.id('dog')), timeout)
-      .then((select) => {
-        driver.wait(until.elementIsVisible(select));
-        select.click();
-        return select;
-      })
-
-      // Wait for the animal description to update
-      .then(() => driver.wait(until.elementLocated(By.id('animal-select')), timeout))
-      .then(waitUntilLoaded)
-      // Get the animal description text and validate it
-      .then((description) => description.getText())
-      .then((text) => {
-        expect(text).toBe('Select dog');
         done();
       });
   });
