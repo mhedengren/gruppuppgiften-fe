@@ -105,7 +105,8 @@
   window.pageLoaded = pageLoaded;
 
   module.exports = {
-    clearElement
+    clearElement,
+    listenToRadio
   };
 
 
