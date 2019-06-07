@@ -85,33 +85,33 @@ describe('html tests', () => {
       });
   });
 
-  test('upload animal', (done) => {
-    // Find the animal input field and fill it with animal data
-    driver.wait(until.elementLocated(By.id('animal-to-add')), timeout)
-      .then((textarea) => {
-        textarea.sendKeys('\t');
-        textarea.clear();
-        textarea.sendKeys('{"name":"test"}');
-      })
-      // Find the submit button and simulate a click
-      .then(() => driver.wait(until.elementLocated(By.id('animal-add')), timeout))
-      .then((button) => {
-        button.click();
-        return button;
-      })
-      // Wait until the load (post) on the button has finished
-      .then(waitUntilLoaded)
-      // Find the select and wait until it has updated
-      .then(() => driver.wait(until.elementLocated(By.id('animal-select')), timeout))
-      .then(waitUntilLoaded)
-      // List the options and get the last one (hopefully the one we just added)
-      .then((select) => select.findElements(By.tagName('option')))
-      .then((options) => options.pop())
-      // Validate that the text is the one we entered as a name
-      .then((lastOption) => lastOption.getText())
-      .then((text) => {
-        expect(text).toBe('test');
-        done();
-      });
+  // test('upload animal', (done) => {
+  //   // Find the animal input field and fill it with animal data
+  //   driver.wait(until.elementLocated(By.id('animal-to-add')), timeout)
+  //     .then((textarea) => {
+  //       textarea.sendKeys('\t');
+  //       textarea.clear();
+  //       textarea.sendKeys('{"name":"test"}');
+  //     })
+  //     // Find the submit button and simulate a click
+  //     .then(() => driver.wait(until.elementLocated(By.id('animal-add')), timeout))
+  //     .then((button) => {
+  //       button.click();
+  //       return button;
+  //     })
+  //     // Wait until the load (post) on the button has finished
+  //     .then(waitUntilLoaded)
+  //     // Find the select and wait until it has updated
+  //     .then(() => driver.wait(until.elementLocated(By.id('animal-select')), timeout))
+  //     .then(waitUntilLoaded)
+  //     // List the options and get the last one (hopefully the one we just added)
+  //     .then((select) => select.findElements(By.tagName('option')))
+  //     .then((options) => options.pop())
+  //     // Validate that the text is the one we entered as a name
+  //     .then((lastOption) => lastOption.getText())
+  //     .then((text) => {
+  //       expect(text).toBe('test');
+  //       done();
+  //     });
   });
 });
