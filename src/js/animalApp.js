@@ -10,6 +10,53 @@
   const $animalToAdd = document.getElementById('animal-to-add');
   const $animalAdd = document.getElementById('animal-add');
 
+  //User input
+  const $userNameInput = document.getElementById('name');
+  const $userEmailInput = document.getElementById('email');
+  var checkOne = /^[\w ]+$/;
+  var checkTwo = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  function listenToUserInput() {
+
+    document.querySelector('form#user-input').addEventListener('submit', function (e) {
+
+        //prevent the normal submission of the form
+        e.preventDefault();
+
+        if ($userNameInput.value == "" || $userEmailInput.value == "") {
+          document.getElementById("error1").innerHTML= "*All fields are required!";
+          console.log("All fields are required!");
+          $userNameInput.focus();
+          return false;
+        }
+
+        if (!checkOne.test($userNameInput.value)) {
+          document.getElementById("error2").innerHTML= "*Input contains invalid characters!";
+          console.log("Error: Input contains invalid characters!");
+          $userNameInput.focus();
+          return false;
+        }
+
+        if (!checkTwo.test($userEmailInput.value)) {
+          document.getElementById("error3").innerHTML= "*Input contains invalid e-mail format!";
+          console.log("Error: Input contains invalid e-mail format!");
+          $userEmailInput.focus();
+          return false;
+        }
+
+        else {
+          document.getElementById("success").innerHTML= "Thank you!";
+          console.log('Your name: ' + $userNameInput.value); 
+          console.log('Your e-mail: ' + $userEmailInput.value);
+          return true;
+        }
+
+    }); 
+
+  } 
+
+  //User input end
+
   function clearElement(element) {
     while(element.firstChild) {
       element.removeChild(element.firstChild);
@@ -100,13 +147,15 @@
     listenToSelect();
     listenToRadio();
     listenToAdd();
+    listenToUserInput();
   }
 
   window.pageLoaded = pageLoaded;
 
   module.exports = {
     clearElement,
-    listenToRadio
+    listenToRadio,
+    listenToUserInput
   };
 
 
