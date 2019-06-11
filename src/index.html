@@ -1,6 +1,24 @@
 <!doctype html>
 <html lang="en">
-<head><title>Little cat fanpage</title></head>
+<head>
+<title>Little cat fanpage</title>
+<style>
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 2px 1px;
+        cursor: pointer;
+        border-radius: 12px;
+    }
+   
+</style>
+</head>
 <body>
 
 <div id="animal-listing">
@@ -19,7 +37,30 @@
     <textarea id="animal-to-add"></textarea>
     <button id="animal-add">Add animal</button>
 </div>
+<!-- Form for user input -->
+<h3>Find out about new animals</h3>
+
+<form id="user-input" onsubmit ="return listenToUserInput()">
+    <p id="error1" style="color:red; font-size: 14px"></p>
+    <div>
+        <label for="name">Enter your name: </label><span id="error2" style="color:red; font-size: 14px"></span>
+        <br />
+        <input type="text" id="name" placeholder="Name" value="" style="font-size: 16px; padding: 2px"><br />
+    </div>
+    <br />
+    <div>
+        <lable for="email">Enter your e-mail: </lable><span id="error3" style="color:red; font-size: 14px"></span>
+        <br />
+        <input type="email" id="email" placeholder="Email" value="" style="font-size: 16px; padding: 2px"><br />
+    </div>
+    <br />
+    <button type="submit" class="button" id="signup-btn">Let me know!</button>
+    <br />
+    <p id='success' style="color:#4CAF50; font-size: 14px"></p>
+</form>
+<script>var module = {};</script>
 <script src="./js/animalApp.js"></script>
+<script> function listenToUserInput() {} </script>
 <script> pageLoaded(); </script>
 </body>
 </html>
